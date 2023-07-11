@@ -27,10 +27,6 @@ public class MessageController {
             senderName = (String) session.getAttribute("senderName");
         }
         model.addAttribute("senderName", senderName);
-//        // Получение списка записей из базы данных
-//        List<SalesJpa> sales = saleRepository.findAll();
-//        model.addAttribute("sales", sales);
-
         return "messages";
     }
     @PostMapping("/messages/add")
@@ -45,19 +41,15 @@ public class MessageController {
         messageRepository.saveAndFlush(message2);
         redirectAttributes.addAttribute("senderName", senderName);
         return "redirect:/messages";
-//        return "index";
     }
     @PostMapping("/search")
-//    @Transactional
     public String searchMessage(@RequestParam("searchMessages") String searchMessages,
                                 RedirectAttributes redirectAttributes,Model model,
                                 HttpSession session)  {
         String senderName = (String) session.getAttribute("senderName");
-//         Сохранение новой записи в базу данных
         List<MessageJpa> messages = messageRepository.findBySenderMessage(searchMessages);
         model.addAttribute("messages", messages);
         redirectAttributes.addAttribute("senderName", senderName);
-        return "redirect:/messages";
-//        return "index";
+        return "search";
     }
 }
