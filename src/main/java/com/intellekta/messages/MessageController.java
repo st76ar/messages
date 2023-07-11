@@ -49,7 +49,7 @@ public class MessageController {
         String senderName = (String) session.getAttribute("senderName");
         List<MessageJpa> messages = messageRepository.findBySenderMessage(searchMessages);
         model.addAttribute("messages", messages);
-        redirectAttributes.addAttribute("senderName", senderName);
+        model.addAttribute("senderName", senderName);
         return "search";
     }
 }

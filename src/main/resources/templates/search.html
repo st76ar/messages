@@ -2,17 +2,43 @@
 <html lang="ru">
 <head>
     <title>Messages</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-<h1>Текущий пользователь: [[${senderName}]]</h1>
+<h1>Текущий пользователь: <span th:text="${senderName}"></span></h1>
 
 <h2>Список сообщений:</h2>
-<ul>
-    <li th:each="message : ${messages}">
-        <span th:text="'Текст сообщения: ' + ${message.textMessage}"></span>
-        <span th:text="'Отправитель сообщения: ' + ${message.senderMessage}"></span>
-    </li>
-</ul>
+<table>
+    <thead>
+    <tr>
+        <th>Текст сообщения</th>
+        <th>Отправитель сообщения</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="message : ${messages}">
+        <td th:text="${message.textMessage}"></td>
+        <td th:text="${message.senderMessage}"></td>
+    </tr>
+    </tbody>
+</table>
+
 <form action="/" method="GET">
     <input type="submit" value="Вернуться к вводу отправителя">
 </form>
